@@ -1,0 +1,61 @@
+﻿using GerenciadorCondominios.BLL.Models;
+using GerenciadorCondominios.DAL.Mapeamentos;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace GerenciadorCondominios.DAL
+{
+    //nos parametros da interface eu passo meu IdentityUser que é o usuário, o meu IdentityRoler que é a função e passo o tipo do id dessas minhas duas classes que no caso é string.
+    public class Contexto : IdentityDbContext<Usuario, Funcao, string>
+    {
+        public DbSet<Aluguel> Alugueis { get; set; }
+
+        public DbSet<Apartamento> Apartamentos { get; set; }
+
+        public DbSet<Evento> Eventos { get; set; }
+
+        public DbSet<Funcao> Funcoes { get; set; }
+
+        public DbSet<HistoricoRecurso> HistoricoRecursos { get; set; }
+
+        public DbSet<Mes> Meses { get; set; }
+
+        public DbSet<Pagamento> Pagamentos { get; set; }
+
+        public DbSet<ServicoPredio> ServicoPredios { get; set; }
+
+        public DbSet<Servico> Servicos { get; set; }
+
+        public DbSet<Usuario> Usuarios { get; set; }
+
+        public DbSet<Veiculo> Veiculos { get; set; }
+
+        
+        public Contexto(DbContextOptions<Contexto> opcoes) : base(opcoes)
+        {
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            //Aqui declaro que meu contexto vai ter as configurações que fiz nas classes de mapeamento.
+            builder.ApplyConfiguration(new AluguelMap());
+            builder.ApplyConfiguration(new ApartamentoMap());
+            builder.ApplyConfiguration(new ServicoMap());
+            builder.ApplyConfiguration(new EventoMap());
+            builder.ApplyConfiguration(new FuncaoMap());
+            builder.ApplyConfiguration(new HistoricoRecursoMap());
+            builder.ApplyConfiguration(new MesMap());
+            builder.ApplyConfiguration(new ServicoPredioMap());
+            builder.ApplyConfiguration(new UsuarioMap());
+            builder.ApplyConfiguration(new VeiculoMap());
+        }
+
+
+    }
+}
