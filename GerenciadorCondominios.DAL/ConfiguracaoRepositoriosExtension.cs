@@ -15,6 +15,7 @@ namespace GerenciadorCondominios.DAL
 
             //Injeção de Indepêndencia.
             services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddTransient<IFuncaoRepositorio, FuncaoRepositorio>();
         }
 
 
